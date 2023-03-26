@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-10 offset-1">
+    <h1>{{user__name}}のページ</h1>
+<table class="table table-striped table-bordered">
+<thead>
+  <tr>
+     <td>写真</td>
+     <td>店名</td>
+     <td>ジャンル</td>
+     <td>地域</td>
+     <td>コメント</td>
+  </tr>
+</thead>
+<tbody>
+{% for object in product_data_list %}
+  <tr>
+    <td><a href="{% url 'boards:product_detail' pk=object.id %}">
+      <img width="100px" height="100px" src={{ object.picture.url }}>
+    </a></td>
+    <td>{{ object.store_name }}</td>
+    <td>{{ object.kinds }}</td>
+    <td>{{ object.place_prefecture }}</td>
+    <td>{{ object.comments }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

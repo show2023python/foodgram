@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-10 offset-1">
+    <h1>投稿検索</h1>
+<form method="get" action="{% url 'boards:product_list' %}">
+  <p>店名: <input type="text" name="store_name" value="{{ store_name }}"/></p>
+  <p>ジャンル: <input type="text" name="kinds" value="{{ kinds }}"/></p>
+  <p>地域: <input type="text" name="place_prefecture" value="{{ place_prefecture }}"/></p>
+  <p><input type="submit" value="実行する"/></p>
+</form>
+<table class="table table-striped table-bordered">
+<thead>
+  <tr>
+     <td>写真</td>
+     <td>ユーザー名</td>
+     <td>店名</td>
+     <td>ジャンル</td>
+     <td>地域</td>
+     <td>コメント</td>
+  </tr>
+</thead>
+<tbody>
+{% for product in object_list %}
+  <tr>
+    <td><a href="{% url 'boards:product_detail' pk=product.id %}">
+      <img width="100px" height="100px" src={{ product.picture.url }}>
+    </a></td>
+    <td><a href="{% url 'boards:another_product_list' pk=product.user.id %}">{{ product.user.username }}</a></td>
+    <td>{{ product.store_name }}</td>
+    <td>{{ product.kinds }}</td>
+    <td>{{ product.place_prefecture }}</td>
+    <td>{{ product.comments }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

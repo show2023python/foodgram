@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-6 offset-3">
+    <div>
+        <img width="100px" height="100px" src={{ object.picture.url }}>
+    </div>
+    <div class="border border-dark">
+        <p>ユーザー名: {{ object.user.username }}</p>
+        <p>店名: {{ object.store_name }}</p>
+        <p>ジャンル: {{ object.kinds }}</p>
+        <p>郵便番号: {{ object.zip_code }}</p>
+        <p>地域: {{ object.place_prefecture }}</p>
+        <p>地域(その他): {{ object.place_another }}</p>
+        <p>コメント: {{ object.comments }}</p>
+        <p>詳細コメント: {{ object.main_comments }}</p>
+    </div>
+    {% if object.user == request.user %}
+    <td align="right">
+        <a class="btn btn-primary" href="{% url 'boards:update_product' pk=object.id %}">変更する</a>
+        <a class="btn btn-danger" href="{% url 'boards:delete_product' pk=object.id %}">削除する</a>
+    </td>
+    {% endif %}
+
+{% endblock %}
