@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,12 +23,13 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '352u7n%j8*u&don_w==apb3i-1(*knd$sq#x6o9%)8ml=pmwld'
+#SECRET_KEY = '352u7n%j8*u&don_w==apb3i-1(*knd$sq#x6o9%)8ml=pmwld'
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'show2023python.pythonanywhere.com']
 
 
 # Application definition
@@ -133,3 +135,7 @@ LOGOUT_REDIRECT_URL = '/accounts/user_login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#HTTPにクッキーやセッションクッキーを誤送信するのを防ぐため
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
